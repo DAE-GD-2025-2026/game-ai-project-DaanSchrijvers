@@ -114,7 +114,7 @@ void ALevel_SteeringBehaviors::Tick(float DeltaTime)
 			ImGui::PushItemWidth(100);
 
 			// Add the names of your steering behaviors
-			if (ImGui::Combo("", &a.SelectedBehavior, "Seek\0Wander\0Flee\0Arrive\0Evade\0Pursuit", 4)) //Add face when needed
+			if (ImGui::Combo("", &a.SelectedBehavior, "Seek\0Flee\0Arrive\0Face\0Pursuit\0Evade\0Wander", 4))
 			{
 				bBehaviourModified = true;
 			}
@@ -229,24 +229,24 @@ void ALevel_SteeringBehaviors::SetAgentBehavior(ImGui_Agent& Agent)
 	case BehaviorTypes::Seek:
 		Agent.Behavior = std::make_unique<Seek>();
 		break;
-	/*case BehaviorTypes::Flee:
+	case BehaviorTypes::Flee:
 		Agent.Behavior = std::make_unique<Flee>();
 		break;
 	case BehaviorTypes::Arrive:
-		Agent.Behavior = std::make_unique<Arrive>();
+		//Agent.Behavior = std::make_unique<Arrive>();
 		break;
 	case BehaviorTypes::Face:
-		Agent.Behavior = std::make_unique<Face>();
+		//Agent.Behavior = std::make_unique<Face>();
 		break;
 	case BehaviorTypes::Pursuit:
-		Agent.Behavior = std::make_unique<Pursuit>();
+		//Agent.Behavior = std::make_unique<Pursuit>();
 		break;
 	case BehaviorTypes::Evade:
-		Agent.Behavior = std::make_unique<Evade>();
+		//Agent.Behavior = std::make_unique<Evade>();
 		break;
 	case BehaviorTypes::Wander:
-		Agent.Behavior = std::make_unique<Wander>();
-		break;*/
+		//Agent.Behavior = std::make_unique<Wander>();
+		break;
 	default:
 		assert(false); // Incorrect Agent Behavior gotten during SetAgentBehavior()	
 		break;
