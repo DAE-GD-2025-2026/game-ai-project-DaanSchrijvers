@@ -2,6 +2,8 @@
 
 #include "SteeringAgent.h"
 
+#include "Materials/MaterialExpressionArccosine.h"
+
 
 // Sets default values
 ASteeringAgent::ASteeringAgent()
@@ -28,7 +30,15 @@ void ASteeringAgent::Tick(float DeltaTime)
 
 	if (SteeringBehavior)
 	{
+		const float rotationSpeed = 2.f;;
+		
 		SteeringOutput output = SteeringBehavior->CalculateSteering(DeltaTime, *this);
+		if (abs(output.AngularVelocity) < 0.3f)
+		{
+			DeltaTime = 1.f / rotationSpeed; //Angle will clip to target once it gets close enough
+		}
+		output.LinearVelocity = output.LinearVelocity.GetRotated(output.AngularVelocity * DeltaTime * rotationSpeed);
+		
 		AddMovementInput(FVector{output.LinearVelocity, 0.f});
 	}
 }
